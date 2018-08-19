@@ -45,7 +45,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cors({
-    origin: ['http://localhost:4200', 'http://127.0.0.1:4200', 'https://www.facebook.com'],
+    origin: ['http://localhost:4200', 'http://127.0.0.1:4200', 'http://localhost:8080', 'http://127.0.0.1:8080', 'https://www.facebook.com'],
     credentials: true
 }));
 

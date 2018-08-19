@@ -47,7 +47,7 @@ router.post('/register', (req, res, next) => {
                     to: user.email,
                     subject: 'Activation Link',
                     text: 'Hello ' + user.fullname + ', Thank you for registering at Tradedeport. Please click the link below to complete registration http://localhost:8000/api/activate/' + user.temporarytoken,
-                    html: 'Hello<strong> ' + user.first_name +' '+ user.last_name + ' </strong><br/><br/> Thank you for registering to tradedeport.com. Please click the link below to complete registration.<br/>http://localhost:4200/activate/' + user.temporarytoken
+                    html: 'Hello<strong> ' + user.first_name + ' ' + user.last_name + ' </strong><br/><br/> Thank you for registering to tradedeport.com. Please click the link below to complete registration.<br/>http://localhost:4200/activate/' + user.temporarytoken
                 };
 
                 //sending mail
@@ -63,26 +63,26 @@ router.post('/register', (req, res, next) => {
             } catch (error) {
                 return res.status(501).json(error);
             }
-        }else if(user){
-            return res.status(501).json({error: 'User Already exist!'});
+        } else if (user) {
+            return res.status(501).json({ error: 'User Already exist!' });
         }
     });
 
 });
 
-router.get('/location',(req,res) =>{
+router.get('/location', (req, res) => {
     location((err, loc) => {
         if (err) console.error(err);
         else res.json(loc);
     })
 });
 
-router.post('/licence-apply' ,isValidUser, (req, res, next) => {
+router.post('/licence-apply', isValidUser, (req, res, next) => {
     VehicleLicence.findOne({ user: req.user._id }, function(error, user) {
         if (error) {
             res.json(error);
         } else if (!user) {
-        
+
             let licence = new VehicleLicence();
             licence.application_type = req.body.application_type;
             licence.user = req.user._id
@@ -96,7 +96,7 @@ router.post('/licence-apply' ,isValidUser, (req, res, next) => {
                     to: user.email,
                     subject: 'Activation Link',
                     text: 'Hello ' + user.fullname + ', Thank you for registering at Tradedeport. Please click the link below to complete registration http://localhost:8000/api/activate/' + user.temporarytoken,
-                    html: 'Hello<strong> ' + user.first_name +' '+ user.last_name + ' </strong><br/><br/> Thank you for registering to tradedeport.com. Please click the link below to complete registration.<br/>http://localhost:4200/activate/' + user.temporarytoken
+                    html: 'Hello<strong> ' + user.first_name + ' ' + user.last_name + ' </strong><br/><br/> Thank you for registering to tradedeport.com. Please click the link below to complete registration.<br/>http://localhost:4200/activate/' + user.temporarytoken
                 };
 
                 //sending mail
@@ -117,13 +117,13 @@ router.post('/licence-apply' ,isValidUser, (req, res, next) => {
             } catch (error) {
                 return res.status(501).json(error);
             }
-        }else{
+        } else {
             let email = {
                 from: 'Tradedeport, tradedeport@tradedeport.com',
                 to: user.email,
                 subject: 'Activation Link',
                 text: 'Hello ' + user.fullname + ', Thank you for registering at Tradedeport. Please click the link below to complete registration http://localhost:8000/api/activate/' + user.temporarytoken,
-                html: 'Hello<strong> ' + user.first_name +' '+ user.last_name + ' </strong><br/><br/> Thank you for registering to tradedeport.com. Please click the link below to complete registration.<br/>http://localhost:4200/activate/' + user.temporarytoken
+                html: 'Hello<strong> ' + user.first_name + ' ' + user.last_name + ' </strong><br/><br/> Thank you for registering to tradedeport.com. Please click the link below to complete registration.<br/>http://localhost:4200/activate/' + user.temporarytoken
             };
 
             //sending mail
@@ -160,8 +160,8 @@ router.patch('/activate/:token', (req, res, next) => {
                 from: 'Tradedeport, tradedeport@tradedeport.com',
                 to: user.email,
                 subject: 'Account Activated',
-                text: 'Hello ' + user.first_name +' '+ user.last_name + ', Thank you for registering at Tradedeport. Your Account has been activated successfully.',
-                html: 'Hello<strong> ' + user.first_name +' '+ user.last_name +  '</strong>,<br/><br/> Thank you for registering to tradedeport. Your Account has been activated successfully.'
+                text: 'Hello ' + user.first_name + ' ' + user.last_name + ', Thank you for registering at Tradedeport. Your Account has been activated successfully.',
+                html: 'Hello<strong> ' + user.first_name + ' ' + user.last_name + '</strong>,<br/><br/> Thank you for registering to tradedeport. Your Account has been activated successfully.'
             };
 
             //getting mail data
@@ -206,15 +206,15 @@ router.get("/logout", isValidUser, function(req, res, next) {
     return res.status(200).json({ 'msg': 'Logout Successfull!' });
 });
 
-router.get('/auth/facebook', passport.authenticate('facebook', { 
-  scope : ['public_profile', 'email']
+router.get('/auth/facebook', passport.authenticate('facebook', {
+    scope: ['public_profile', 'email']
 }));
 
 // handle the callback after facebook has authenticated the user
 router.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect : '/user',
-        failureRedirect : '/login'
+        successRedirect: '/user',
+        failureRedirect: '/login'
     })
 );
 

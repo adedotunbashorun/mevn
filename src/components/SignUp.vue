@@ -141,7 +141,7 @@
         },
         methods: {
             User(){
-                axios.get('api/users')
+                axios.get('http://localhost:8080/api/user')
                   .then(response => {
                       this.$router.push({name: 'home'});
                   }).catch(error => {
@@ -151,7 +151,7 @@
             register(){
                 this.load= 1;
                 let component = this;
-                axios.post('/api/register', this.user)
+                axios.post('http://localhost:8080/api/register', this.user)
                     .then(function (response) {
                         if (response.data.meta.status === "ok") {
                             component.user.email = '';

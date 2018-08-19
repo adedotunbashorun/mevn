@@ -73,6 +73,7 @@
 <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script>
     import axios from 'axios';
+    import * as MutationTypes from '../store/auth/MutationTypes';
     import loading from 'vue-full-loading'
     export default {
         data() {
@@ -96,7 +97,7 @@
         },
         methods: {
             User(){
-              axios.get('api/users')
+              axios.get('http://localhost:8080/api/user')
                 .then(response => {
                     this.$router.push({name: 'home'});
                 }).catch(error => {
@@ -110,7 +111,7 @@
                     password: this.authenticate.password
                 };
                 let component = this;
-                axios.post('/api/login', authenticate)
+                axios.post('http://localhost:8080/api/login', authenticate)
                     .then(function (response) {
                         if (response.data.meta.status === "ok") {
                             component.$store.dispatch(MutationTypes.SAVE_USER, response);

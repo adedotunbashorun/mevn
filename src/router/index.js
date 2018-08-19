@@ -9,6 +9,7 @@ import Index from '@/components/Index'
 import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
 import Features from '@/components/Features'
+import Forget from '@/components/Forget'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +42,11 @@ export default new Router({
             path: '/signup',
             name: 'signup',
             component: SignUp
+        },
+        {
+            path: '/forget_password',
+            name: 'forget',
+            component: Forget
         },
         {
             path: '/dashboard',

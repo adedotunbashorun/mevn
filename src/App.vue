@@ -30,14 +30,64 @@
 </template>
 
 <script>
+// eslint-disable-next-line to ignore the next line.
+/* eslint-disable */
+import Vue from 'vue'
+import * as MutationTypes from './store/auth/MutationTypes';
 import TopNavbar from './components/Layout/TopNavbar.vue'
 import Footer from './components/Layout/Footer'
+// import VueSweetAlert from 'vue-sweetalert'
+// Vue.use(VueSweetAlert)
 export default {
   name: 'App',
   components: {
     TopNavbar,
     Footer
-  }
+  },
+  computed: {
+      authUser() {
+          return this.$store.getters.authUser;
+      },
+      isLoggedIn() {
+          return this.$store.getters.isLoggedIn;
+      },
+      authToken() {
+          return this.$store.getters.authToken;
+      }
+
+  },
+  mounted(){
+      $('#toggle-btn').on('click', function (e) {
+          e.preventDefault();
+          $(this).toggleClass('active');
+
+          $('.side-navbar').toggleClass('shrinked');
+          $('.content-inner').toggleClass('active');
+
+          if ($(window).outerWidth() > 1183) {
+              if ($('#toggle-btn').hasClass('active')) {
+                  $('.navbar-header .brand-small').hide();
+                  $('.navbar-header .brand-big').show();
+              } else {
+                  $('.navbar-header .brand-small').show();
+                  $('.navbar-header .brand-big').hide();
+              }
+          }
+
+          if ($(window).outerWidth() < 1183) {
+              $('.navbar-header .brand-small').show();
+          }
+      });
+  },
+  methods: {
+      logout(event) {
+          let component = this;
+          component.$store.dispatch(MutationTypes.LOGOUT);
+          component.$router.go({
+              name: 'index'
+          });
+      }
+  },
 }
 </script>
 
