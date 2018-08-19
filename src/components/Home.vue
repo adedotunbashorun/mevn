@@ -1,46 +1,12 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Ecosystem Home</h2>
-    <ul>
-      <li>
-        <router-link :to="{ path: '/' }">Home</router-link>
-      </li>
-      <li>
-        <router-link :to="{ path: 'contact' }">Contact</router-link>
-      </li>
-      <li>
-        <router-link :to="{ path: 'about' }">About</router-link>
-      </li>
-    </ul>
-  </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Dashboard</div>
+                <div class="panel-body"></div>
+            </div>
+        </div>
+    </div>
 </template>
-
 <script>
-export default {
-  name: 'Home',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

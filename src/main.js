@@ -7,10 +7,12 @@ import router from './router'
 window.axios = require('axios')
 Vue.config.productionTip = false
 
+// eslint-disable-next-line
+/* eslint-disable */
 /* eslint-disable no-new */
 new Vue({
-  el: '#app',
-  router,
-  components: { App },
-  template: '<App/>'
+    el: '#app',
+    router,
+    components: { App },
+    template: '<App/>'
 })
