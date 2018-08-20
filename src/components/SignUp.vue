@@ -49,7 +49,7 @@
                             <form class="register-form" method="POST" action="#" @submit.prevent="register">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <label>Name</label>
+                                        <label class="pull-left">Name</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-single-02"></i>
@@ -59,7 +59,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label>Phone Number</label>
+                                        <label class="pull-left">Phone Number</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-mobile"></i>
@@ -69,7 +69,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label>Email</label>
+                                        <label class="pull-left">Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-email-85"></i>
@@ -79,7 +79,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label>Purpose</label>
+                                        <label class="pull-left">Purpose</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-bulb-63"></i>
@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label>Password</label>
+                                        <label class="pull-left">Password</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-key-25"></i>
@@ -141,7 +141,7 @@
         },
         methods: {
             User(){
-                axios.get('http://localhost:8080/api/user')
+                axios.get('http://localhost:8000/api/user')
                   .then(response => {
                       this.$router.push({name: 'home'});
                   }).catch(error => {
@@ -151,9 +151,9 @@
             register(){
                 this.load= 1;
                 let component = this;
-                axios.post('http://localhost:8080/api/register', this.user)
+                axios.post('http://localhost:8000/api/register', this.user)
                     .then(function (response) {
-                        if (response.data.meta.status === "ok") {
+                        if (response.data.msg === "success" ) {
                             component.user.email = '';
                             component.user.password = '';
                             component.user.name = '';
@@ -161,7 +161,7 @@
                             component.user.purpose = '';
                             component.$swal({
                               title: 'Success',
-                              text: response.data.meta.message,
+                              text: response.data.success,
                               type: 'success',
                               showConfirmButton: false,
                               timer: 3000
@@ -170,7 +170,7 @@
                         }else{
                             component.$swal({
                               title: 'ERROR',
-                              text: response.data.meta.message,
+                              text: response.data.error,
                               type: 'error',
                               showConfirmButton: false,
                               timer: 3000

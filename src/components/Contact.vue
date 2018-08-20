@@ -20,7 +20,7 @@
                             <form class="contact-form">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label>Name</label>
+                                        <label class="pull-left">Name</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-single-02"></i>
@@ -29,7 +29,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label>Email</label>
+                                        <label class="pull-left">Email</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-email-85"></i>
@@ -38,7 +38,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                        <label>Subject</label>
+                                        <label class="pull-left">Subject</label>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="nc-icon nc-alert-circle-i"></i>
@@ -47,7 +47,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label>Message</label>
+                                <label class="pull-left">Message</label>
                                 <textarea class="form-control" rows="4" placeholder="What could be bothering you? lay it on us...." v-model="authenticate.message"></textarea>
                                 <div class="row">
                                     <div class="col-md-4 ml-auto mr-auto">
@@ -90,5 +90,64 @@
         components: {
             loading
         },
+        mounted() {
+            this.User();
+        },
+        methods: {
+            User(){
+                axios.get('http://localhost:8000/api/user')
+                  .then(response => {
+                      this.$router.push({name: 'home'});
+                  }).catch(error => {
+                      //this.$router.push({name: 'index'});
+                  });
+              },
+            Contact() {
+                this.show = true;
+                let authenticate = {
+                    name: this.authenticate.name,
+                    email: this.authenticate.email,
+                    subject: this.authenticate.subject,
+                    message: this.authenticate.message,
+                };
+                let component = this;
+                axios.post('http://localhost:8000/api/contact', authenticate)
+                    .then(function (response) {
+                        if (response.data.warning) {
+                            component.show = false;
+                            component.$swal({
+                              title: 'warning',
+                              text: response.data.warning,
+                              type: 'warning',
+                              showConfirmButton: false,
+                              timer: 2000
+                            });
+                          component.authenticate.email  = ''
+                        }
+                        if (response.data.success) {
+                            component.show = false;
+                            component.$swal({
+                              title: 'Success',
+                              text: response.data.success,
+                              type: 'success',
+                              showConfirmButton: false,
+                              timer: 2000
+                            });
+                          authenticate = ''
+                          //component.$router.push({name: 'index'});
+                        }
+                    }, function (response) {
+                        component.show = false;
+                        component.$swal({
+                              title: 'Eror',
+                              text: 'an error occured! Please enter a valid email address',
+                              type: 'error',
+                              showConfirmButton: false,
+                              timer: 2000
+                            });
+                        console.log(response);
+                    });
+            }
+        }
     }
 </script>

@@ -126,7 +126,7 @@
         },
         methods: {
           User(){
-            axios.get('api/users')
+            axios.get('http://localhost:8000/api/user')
               .then(response => {
                   this.$router.push({name: 'home'});
               }).catch(error => {

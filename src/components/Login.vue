@@ -20,7 +20,7 @@
                                 <form class="register-form" method="POST" action="#" @submit.prevent="login">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <label>Email</label>
+                                            <label class="pull-left">Email</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="nc-icon nc-email-85"></i>
@@ -30,7 +30,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <label>Password</label>
+                                            <label class="pull-left">Password</label>
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="nc-icon nc-key-25"></i>
@@ -97,7 +97,7 @@
         },
         methods: {
             User(){
-              axios.get('http://localhost:8080/api/user')
+              axios.get('http://localhost:8000/api/user')
                 .then(response => {
                     this.$router.push({name: 'home'});
                 }).catch(error => {
@@ -111,7 +111,7 @@
                     password: this.authenticate.password
                 };
                 let component = this;
-                axios.post('http://localhost:8080/api/login', authenticate)
+                axios.post('http://localhost:8000/api/login', authenticate)
                     .then(function (response) {
                         if (response.data.meta.status === "ok") {
                             component.$store.dispatch(MutationTypes.SAVE_USER, response);

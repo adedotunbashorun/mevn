@@ -36,8 +36,8 @@ import Vue from 'vue'
 import * as MutationTypes from './store/auth/MutationTypes';
 import TopNavbar from './components/Layout/TopNavbar.vue'
 import Footer from './components/Layout/Footer'
-// import VueSweetAlert from 'vue-sweetalert'
-// Vue.use(VueSweetAlert)
+import VueSweetAlert from 'vue-sweetalert'
+Vue.use(VueSweetAlert)
 export default {
   name: 'App',
   components: {

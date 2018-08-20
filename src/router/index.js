@@ -10,6 +10,7 @@ import Login from '@/components/Login'
 import SignUp from '@/components/SignUp'
 import Features from '@/components/Features'
 import Forget from '@/components/Forget'
+import Activate from '@/components/Activate'
 Vue.use(Router)
 
 export default new Router({
@@ -47,6 +48,11 @@ export default new Router({
             path: '/forget_password',
             name: 'forget',
             component: Forget
+        },
+        {
+            name: 'activate',
+            path: '/activate/:id',
+            component: Activate
         },
         {
             path: '/dashboard',
