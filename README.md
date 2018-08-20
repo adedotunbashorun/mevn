@@ -1,6 +1,6 @@
 # vueapp
 
-> A Vue.js project
+> A Vue.js project with mongodb node and xpress
 
 ## Build Setup
 
